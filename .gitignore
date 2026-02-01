@@ -1,0 +1,27 @@
+# 設定ファイル（機密情報を含む）
+.env
+config.php
+setup_password.php
+
+# アップロードファイル
+uploads/*
+!uploads/.gitkeep
+
+# ログファイル
+logs/*
+!logs/.gitkeep
+
+# 一時ファイル
+*.tmp
+*.log
+
+# OS固有ファイル
+.DS_Store
+Thumbs.db
+
+# エディタ設定
+.vscode/
+.idea/
+*.swp
+*.swo
+

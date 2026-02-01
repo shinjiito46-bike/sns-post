@@ -1,0 +1,59 @@
+# SNS同時投稿システム - Apache設定
+
+# エラーページの設定
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ディレクトリ一覧の無効化
+Options -Indexes
+
+# PHP設定
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value memory_limit 256M
+
+# セキュリティヘッダー
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ファイルアクセス制限
+<FilesMatch "\.(sql|log|ini|conf|env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# .envファイルの保護
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# setup_password.phpの保護（本番環境では削除推奨）
+<Files "setup_password.php">
+    # 本番環境ではこのファイルを削除するか、IP制限を追加してください
+    # Order deny,allow
+    # Deny from all
+    # Allow from 127.0.0.1
+</Files>
+
+# アップロードディレクトリの保護
+<DirectoryMatch "^.*/uploads/">
+    Options -ExecCGI
+    php_flag engine off
+    AddType text/plain .php .php3 .phtml
+</DirectoryMatch>
+
+# URLリライト（必要に応じて）
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # HTTPSリダイレクト（本番環境で有効化）
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
