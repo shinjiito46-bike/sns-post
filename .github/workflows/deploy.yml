@@ -25,5 +25,3 @@ jobs:
             **/.git*
             **/.github/**
             **/.env
-            **/logs/**
-            **/uploads/**
