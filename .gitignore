@@ -6,10 +6,12 @@ setup_password.php
 # アップロードファイル
 uploads/*
 !uploads/.gitkeep
+!uploads/.htaccess
 
 # ログファイル
 logs/*
 !logs/.gitkeep
+!logs/.htaccess
 
 # 一時ファイル
 *.tmp
