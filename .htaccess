@@ -1,8 +1,5 @@
 # SNS同時投稿システム - Apache設定
 
-# ディレクトリ一覧の無効化
-Options -Indexes
-
 # セキュリティヘッダー
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
@@ -10,7 +7,7 @@ Options -Indexes
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-# ファイルアクセス制限（Apache 2.4対応）
+# ファイルアクセス制限
 <FilesMatch "\.(sql|log|ini|conf|env)$">
     <IfModule mod_authz_core.c>
         Require all denied
@@ -31,19 +28,4 @@ Options -Indexes
         Deny from all
     </IfModule>
 </Files>
-
-# setup_password.phpの保護（本番環境では削除推奨）
-<Files "setup_password.php">
-    # 本番環境ではこのファイルを削除するか、IP制限を追加してください
-</Files>
-
-# URLリライト（必要に応じて）
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    # HTTPSリダイレクト（本番環境で有効化）
-    # RewriteCond %{HTTPS} off
-    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-</IfModule>
 
