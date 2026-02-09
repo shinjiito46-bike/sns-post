@@ -3,17 +3,19 @@
 # デフォルトファイル設定
 DirectoryIndex index.php index.html
 
-# セキュリティヘッダー（Lolipopで動作する最小限）
+# セキュリティヘッダー
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
-# 機密ファイルへのアクセス拒否
+# 機密ファイルへのアクセス拒否（Apache 2.2/2.4両対応）
 <FilesMatch "\.(sql|log|env)$">
-    Require all denied
+    Order allow,deny
+    Deny from all
 </FilesMatch>
 
 <Files ".env">
-    Require all denied
+    Order allow,deny
+    Deny from all
 </Files>
