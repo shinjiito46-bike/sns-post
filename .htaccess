@@ -1,1 +1,19 @@
-# minimal test
+# SNS同時投稿システム - Lolipop対応設定
+
+# デフォルトファイル設定
+DirectoryIndex index.php index.html
+
+# セキュリティヘッダー（Lolipopで動作する最小限）
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# 機密ファイルへのアクセス拒否
+<FilesMatch "\.(sql|log|env)$">
+    Require all denied
+</FilesMatch>
+
+<Files ".env">
+    Require all denied
+</Files>
